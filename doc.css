@@ -1,0 +1,277 @@
+/* Feuilles A4 (CV, lettre) dans l'univers « 8 mètres sous la mousse ».
+   À l'écran : feuilles posées sur la tourbe. À l'impression : A4 exact, sans marges navigateur. */
+
+:root {
+  --paper: #f4efe2;
+  --ink: #2b241c;
+  --muted: #6b5f4f;
+  --accent: #a8324a;   /* rouge des sphaignes */
+  --moss: #6f7f3a;
+  --line: rgba(43, 36, 28, .2);
+  --peat: #3b2a1a;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --strata: linear-gradient(#7d8a3e 0 4%, #a8324a 4% 9%, #c4aa8c 9% 22%, #96704a 22% 42%, #684a2e 42% 66%, #3e2c1c 66% 86%, #22180f 86%);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+
+body {
+  background: #2a1e14 radial-gradient(ellipse at top, #5a412a, #22180f 70%) fixed;
+  color: var(--ink);
+  font-family: var(--serif);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ---------- Barre d'outils (écran seulement) ---------- */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  padding: 12px 16px;
+  font-family: var(--sans);
+  font-size: 14px;
+}
+.toolbar a, .toolbar button {
+  font: inherit;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--paper);
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.toolbar a:hover, .toolbar button:hover { background: #fff; }
+.toolbar .primary { background: var(--accent); color: #fff; }
+.toolbar .primary:hover { background: #8e2840; }
+
+/* ---------- Feuille A4 ---------- */
+.sheet {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  margin: 8px auto 32px;
+  padding: 16mm 15mm 14mm 24mm;
+  background: var(--paper);
+  box-shadow: 0 24px 50px -20px rgba(0, 0, 0, .7);
+  overflow: hidden;
+  font-size: 9.4pt;
+  line-height: 1.42;
+}
+/* La carotte de tourbe en marge gauche */
+.sheet::before {
+  content: "";
+  position: absolute;
+  left: 9mm;
+  top: 16mm;
+  bottom: 14mm;
+  width: 4mm;
+  border-radius: 2mm 2mm 1mm 1mm;
+  background: var(--strata);
+}
+.sheet .folio {
+  position: absolute;
+  right: 15mm;
+  bottom: 7mm;
+  font-family: var(--sans);
+  font-size: 7pt;
+  color: var(--muted);
+}
+
+/* ---------- En-tête ---------- */
+.head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6mm;
+  align-items: end;
+  padding-bottom: 4mm;
+  border-bottom: 1.5px solid var(--ink);
+  margin-bottom: 5mm;
+}
+.head h1 {
+  margin: 0;
+  font-size: 27pt;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+.head .role {
+  margin: 2mm 0 0;
+  font-size: 12pt;
+  font-style: italic;
+  color: var(--accent);
+}
+.contact {
+  font-family: var(--sans);
+  font-size: 8pt;
+  line-height: 1.55;
+  text-align: right;
+  color: var(--ink);
+}
+.contact a { color: inherit; text-decoration: none; }
+
+.kicker {
+  font-family: var(--sans);
+  font-size: 7.4pt;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 2mm;
+}
+
+.lead {
+  font-size: 11pt;
+  line-height: 1.45;
+  margin: 0 0 5mm;
+}
+
+/* ---------- Sections du CV ---------- */
+.cols {
+  display: grid;
+  grid-template-columns: 1fr 52mm;
+  gap: 7mm;
+}
+section { margin-bottom: 4.5mm; }
+section > h2 {
+  font-family: var(--sans);
+  font-size: 7.6pt;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 2.2mm;
+  padding-bottom: 1mm;
+  border-bottom: 1px solid var(--line);
+}
+.entry { margin-bottom: 3mm; break-inside: avoid; }
+.entry .when {
+  font-family: var(--sans);
+  font-size: 7.4pt;
+  color: var(--muted);
+  letter-spacing: .02em;
+}
+.entry h3 {
+  margin: .3mm 0 .6mm;
+  font-size: 10.2pt;
+  line-height: 1.25;
+  font-weight: 700;
+}
+.entry h3 small { font-weight: 400; font-style: italic; color: var(--muted); font-size: 9pt; }
+.entry p { margin: 0 0 .8mm; }
+.entry ul { margin: .5mm 0 0; padding-left: 3.6mm; }
+.entry li { margin-bottom: .3mm; }
+.entry li::marker { color: var(--moss); }
+
+.skills { list-style: none; margin: 0; padding: 0; }
+.skills li {
+  padding: 1.4mm 0 1.4mm 4mm;
+  border-bottom: 1px dashed var(--line);
+  position: relative;
+}
+.skills li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2.6mm;
+  width: 2mm;
+  height: 2mm;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.skills b { display: block; }
+.skills span { font-family: var(--sans); font-size: 7.6pt; color: var(--muted); }
+
+.side p, .side li { font-size: 8.6pt; }
+.side ul { list-style: none; margin: 0; padding: 0; }
+.side li { margin-bottom: 1.2mm; }
+.side b { font-weight: 700; }
+
+.now {
+  background: rgba(111, 127, 58, .11);
+  border-left: 2.5px solid var(--moss);
+  padding: 2.5mm 3mm;
+}
+
+/* Encart QR */
+.qr {
+  display: grid;
+  grid-template-columns: 22mm 1fr;
+  gap: 3mm;
+  align-items: center;
+  padding: 3mm;
+  border: 1.5px solid var(--ink);
+  border-radius: 2mm;
+  background: #fbf8ef;
+}
+.qr img { width: 22mm; height: 22mm; display: block; }
+.qr p { margin: 0; font-size: 8.4pt; line-height: 1.35; }
+.qr b { display: block; font-size: 9.6pt; }
+.qr a { color: var(--accent); word-break: break-all; font-family: var(--sans); font-size: 7.4pt; }
+
+.side .qr { grid-template-columns: 17mm 1fr; padding: 2.5mm; }
+.side .qr img { width: 17mm; height: 17mm; }
+
+/* ---------- Lettre ---------- */
+.letter { font-size: 10.1pt; line-height: 1.46; }
+.letter .addr {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6mm;
+  margin: 0 0 4mm;
+  font-size: 9.4pt;
+  line-height: 1.45;
+}
+.letter .addr .to { padding-left: 4mm; }
+.letter .place { text-align: right; margin: 0 0 3.5mm; font-size: 9.4pt; }
+.letter .object { font-weight: 700; margin: 0 0 4mm; }
+.letter .object span { font-family: var(--sans); font-size: 7.6pt; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); display: block; font-weight: 700; }
+.letter p { margin: 0 0 2.2mm; text-align: left; hyphens: auto; }
+.letter .sign { margin-top: 0; }
+.letter .sign b { font-size: 12pt; }
+.letter .ps { display: flex; gap: 4mm; align-items: center; margin-top: 2mm; }
+
+a { color: inherit; }
+
+/* ---------- Écrans étroits : feuille fluide ---------- */
+@media screen and (max-width: 820px) {
+  .sheet {
+    width: auto;
+    height: auto;
+    margin: 8px 12px 24px;
+    padding: 24px 18px 28px 32px;
+    font-size: 15px;
+    overflow: visible;
+  }
+  .sheet::before { left: 12px; top: 24px; bottom: 24px; width: 6px; }
+  .head { grid-template-columns: 1fr; }
+  .head h1 { font-size: 30px; }
+  .contact { text-align: left; }
+  .cols { grid-template-columns: 1fr; }
+  .letter { font-size: 16px; }
+  .letter .addr { grid-template-columns: 1fr; }
+  .letter .addr .to { padding-left: 0; }
+  .sheet .folio { display: none; }
+}
+
+/* ---------- Impression ---------- */
+@page { size: A4; margin: 0; }
+@media print {
+  body { background: none; }
+  .toolbar { display: none; }
+  .sheet {
+    margin: 0;
+    box-shadow: none;
+    break-after: page;
+  }
+  .sheet:last-of-type { break-after: auto; }
+  a { text-decoration: none; }
+}

@@ -34,6 +34,14 @@ Les ordres de grandeur viennent des sources listées sur la page « Sources ». 
 - la succession des « âges » forestiers (bouleau, pin, noisetier, sapin blanc, hêtre) tirée de la thèse d'A. Ischer (1935) ;
 - la phrase sur l'agriculture au moment de la formation de la première couche.
 
+## CV, lettre et QR codes
+
+- `cv.html` et `lettre.html` : versions web, imprimables en A4 (bouton « Imprimer / PDF » en haut, ou Ctrl/Cmd + P, format A4, marges « aucune », graphiques d'arrière-plan activés). Styles communs dans `doc.css`.
+- Le téléphone est en commentaire dans les deux fichiers : à décommenter seulement pour le PDF envoyé, pas pour la version en ligne.
+- Les deux pages ont `noindex` : les moteurs de recherche ne les référencent pas, mais elles restent publiques pour qui a le lien.
+- `qr/qr-site.svg`, `qr/qr-cv.svg`, `qr/qr-lettre.svg` : QR codes en millimètres (1 module = 1 mm), un seul chemin noir, prêts pour la gravure laser.
+- `qr/planche-herbier-qr.svg` : plaquette de 149 × 73 mm avec les trois QR codes (35 mm) et leurs légendes. Calques : `gravure-qr`, `gravure-texte` (convertir le texte en chemins dans Inkscape : Chemin → Objet en chemin) et `decoupe` (contour rouge fin).
+
 ## Sources
 
 - Maison de la Tourbière — https://www.mdt-ne.ch/
