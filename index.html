@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>8 mètres sous la mousse</title>
+  <meta name="description" content="Un parcours dont vous êtes le héros, à travers les couches de la tourbière des Ponts-de-Martel : 1 millimètre par an, 8500 ans d'archives.">
+  <meta property="og:title" content="8 mètres sous la mousse">
+  <meta property="og:description" content="Descendez couche par couche dans la tourbière des Ponts-de-Martel.">
+  <meta name="theme-color" content="#d9dcc4">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="strata" aria-hidden="true">
+    <svg id="strata-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"></svg>
+  </div>
+
+  <header class="top">
+    <span class="brand">8 mètres sous la mousse</span>
+    <button class="restart" id="restart" type="button">↺ Recommencer</button>
+  </header>
+
+  <aside class="gauge" aria-label="Profondeur et âge de la couche">
+    <div class="gauge-track"><div class="gauge-marker" id="gauge-marker"></div></div>
+    <div class="gauge-label" id="gauge-label">
+      <span class="g-depth">0 cm</span>
+      <span class="g-age">aujourd'hui</span>
+    </div>
+  </aside>
+
+  <main class="stage">
+    <article class="card" id="card" aria-live="polite" tabindex="-1">
+      <p class="kicker" id="kicker"></p>
+      <h1 id="title"></h1>
+      <div class="body" id="body"></div>
+      <div class="aside-note" id="aside" hidden></div>
+      <nav class="choices" id="choices" aria-label="Que faites-vous ?"></nav>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <p>Prototype de médiation · tourbière des Ponts-de-Martel · contenus à valider par des spécialistes · <a href="#sources" data-scene="sources">Sources</a></p>
+  </footer>
+
+  <noscript><p class="noscript">Ce parcours a besoin de JavaScript pour fonctionner.</p></noscript>
+  <script src="script.js"></script>
+</body>
+</html>
