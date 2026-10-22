@@ -70,7 +70,7 @@ body.editing .sheet :focus { outline: none; background: rgba(168, 50, 74, .06); 
   width: 210mm;
   height: 297mm;
   margin: 8px auto 32px;
-  padding: 16mm 15mm 14mm 24mm;
+  padding: 15mm 15mm 20mm 24mm;   /* 20 mm en bas : zone que la plupart des imprimantes ne touchent pas */
   background: var(--paper);
   box-shadow: 0 24px 50px -20px rgba(0, 0, 0, .7);
   overflow: hidden;
@@ -82,8 +82,8 @@ body.editing .sheet :focus { outline: none; background: rgba(168, 50, 74, .06); 
   content: "";
   position: absolute;
   left: 9mm;
-  top: 16mm;
-  bottom: 14mm;
+  top: 15mm;
+  bottom: 20mm;
   width: 4mm;
   border-radius: 2mm 2mm 1mm 1mm;
   background: var(--strata);
@@ -91,7 +91,7 @@ body.editing .sheet :focus { outline: none; background: rgba(168, 50, 74, .06); 
 .sheet .folio {
   position: absolute;
   right: 15mm;
-  bottom: 7mm;
+  bottom: 12mm;
   font-family: var(--sans);
   font-size: 7pt;
   color: var(--muted);

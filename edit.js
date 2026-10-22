@@ -48,6 +48,7 @@
       note.textContent = ok
         ? "Modifications enregistrées dans ce navigateur."
         : "Impossible d'enregistrer ici : pensez à imprimer en PDF avant de fermer.";
+      if (window.fitSheets) window.fitSheets();
     }, 400);
   }
 
