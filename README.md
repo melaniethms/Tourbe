@@ -37,7 +37,8 @@ Les ordres de grandeur viennent des sources listées sur la page « Sources ». 
 ## CV, lettre et QR codes
 
 - `cv.html` et `lettre.html` : versions web, imprimables en A4 (bouton « Imprimer / PDF » en haut, ou Ctrl/Cmd + P, format A4, marges « aucune », graphiques d'arrière-plan activés). Styles communs dans `doc.css`.
-- Bouton « Modifier le texte » : corrige le CV ou la lettre directement dans la page, puis « Imprimer / PDF ». Les modifications restent enregistrées dans ton navigateur seulement (`edit.js`) ; « Revenir à la version en ligne » les efface.
+- Mode édition : ouvrir `cv.html?edition` ou `lettre.html?edition` pour voir le bouton « Modifier le texte », corriger, puis « Imprimer / PDF ». Les modifications restent dans ton navigateur seulement (`edit.js`) et ne changent jamais le site en ligne. Sans `?edition` (adresse des QR codes), la page est en lecture seule.
+- `fit.js` : réduit légèrement le texte si une feuille déborde de la zone imprimable (marge basse de 20 mm).
 - Papier blanc pour économiser l'encre.
 - Les deux pages ont `noindex` : les moteurs de recherche ne les référencent pas, mais elles restent publiques pour qui a le lien.
 - `qr/qr-site.svg`, `qr/qr-cv.svg`, `qr/qr-lettre.svg` : QR codes en millimètres (1 module = 1 mm), un seul chemin noir, prêts pour la gravure laser.

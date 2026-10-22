@@ -1,10 +1,16 @@
-/* Mode « Modifier le texte » pour le CV et la lettre.
-   Les modifications sont enregistrées dans ce navigateur seulement (pas sur le site en ligne).
+/* Mode « Modifier le texte » pour le CV et la lettre, visible seulement avec ?edition dans l'adresse
+   (ex. cv.html?edition). Les modifications sont enregistrées dans ce navigateur seulement :
+   elles ne changent jamais le site en ligne.
    Une fois prêtes : « Imprimer / PDF ». */
 (function () {
   const sheets = Array.from(document.querySelectorAll(".sheet"));
   const toolbar = document.querySelector(".toolbar");
   if (!sheets.length || !toolbar) return;
+
+  // Le mode édition n'apparaît qu'avec ?edition dans l'adresse.
+  // Les QR codes pointent vers l'adresse simple : en scannant, on lit seulement.
+  const params = new URLSearchParams(location.search);
+  if (!params.has("edition")) return;
 
   // Empreinte de la version publiée : si le fichier en ligne change, l'ancien brouillon est ignoré.
   const original = sheets.map((s) => s.innerHTML).join("\u0000");

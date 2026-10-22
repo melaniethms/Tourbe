@@ -249,6 +249,9 @@ section > h2 {
 .letter .sign { margin-top: 0; }
 .letter .sign b { font-size: 12pt; }
 .letter .ps { display: flex; gap: 4mm; align-items: center; margin-top: 2mm; }
+.letter .qrs { display: flex; gap: 3mm; margin-left: auto; }
+.letter .qrs .qr { grid-template-columns: 18mm 34mm; gap: 2.5mm; padding: 2.5mm; }
+.letter .qrs .qr img { width: 18mm; height: 18mm; }
 
 a { color: inherit; }
 
@@ -270,6 +273,7 @@ a { color: inherit; }
   .letter { font-size: 16px; }
   .letter .addr { grid-template-columns: 1fr; }
   .letter .addr .to { padding-left: 0; }
+  .letter .ps, .letter .qrs { flex-wrap: wrap; }
   .sheet .folio { display: none; }
 }
 

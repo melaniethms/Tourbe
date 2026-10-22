@@ -60,13 +60,23 @@
 
     <div class="ps">
       <div class="sign"><b>Mélanie Thomas</b></div>
-      <div class="qr" style="margin-left:auto;max-width:92mm">
-        <img src="qr/qr-site.svg" alt="QR code vers le parcours 8 mètres sous la mousse">
-        <p><b>8 mètres sous la mousse</b><a href="https://melaniethms.github.io/Tourbe/">melaniethms.github.io/Tourbe</a></p>
+      <div class="qrs">
+        <div class="qr">
+          <img src="qr/qr-site.svg" alt="QR code vers le parcours 8 mètres sous la mousse">
+          <p><b>Le prototype</b>8 mètres sous la mousse</p>
+        </div>
+        <div class="qr">
+          <img src="qr/qr-lettre.svg" alt="QR code vers cette lettre en ligne">
+          <p><b>Cette lettre</b>et mon CV, en ligne</p>
+        </div>
       </div>
     </div>
   </article>
   <script src="fit.js"></script>
+  <script>
+    if (new URLSearchParams(location.search).has("edition"))
+      document.querySelectorAll('.toolbar a[href$=".html"]').forEach((a) => { a.href += "?edition"; });
+  </script>
   <script src="edit.js"></script>
 </body>
 </html>

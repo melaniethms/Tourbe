@@ -251,6 +251,10 @@
     <span class="folio">2 / 2</span>
   </article>
   <script src="fit.js"></script>
+  <script>
+    if (new URLSearchParams(location.search).has("edition"))
+      document.querySelectorAll('.toolbar a[href$=".html"]').forEach((a) => { a.href += "?edition"; });
+  </script>
   <script src="edit.js"></script>
 </body>
 </html>
