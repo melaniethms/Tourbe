@@ -2,7 +2,8 @@
    À l'écran : feuilles posées sur la tourbe. À l'impression : A4 exact, sans marges navigateur. */
 
 :root {
-  --paper: #f4efe2;
+  --paper: #ffffff;       /* papier blanc : économie d'encre à l'impression */
+  --chip: #f4efe2;
   --ink: #2b241c;
   --muted: #6b5f4f;
   --accent: #a8324a;   /* rouge des sphaignes */
@@ -42,7 +43,7 @@ body {
   font: inherit;
   font-weight: 600;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--chip);
   border: 0;
   border-radius: 999px;
   padding: 8px 16px;
@@ -52,6 +53,16 @@ body {
 .toolbar a:hover, .toolbar button:hover { background: #fff; }
 .toolbar .primary { background: var(--accent); color: #fff; }
 .toolbar .primary:hover { background: #8e2840; }
+.toolbar-note {
+  flex-basis: 100%;
+  text-align: center;
+  color: #f4efe2;
+  font-size: 13px;
+  font-weight: 400;
+}
+.toolbar-note:empty { display: none; }
+body.editing .sheet { outline: 3px dashed var(--accent); outline-offset: 6px; cursor: text; }
+body.editing .sheet :focus { outline: none; background: rgba(168, 50, 74, .06); }
 
 /* ---------- Feuille A4 ---------- */
 .sheet {
@@ -210,7 +221,7 @@ section > h2 {
   padding: 3mm;
   border: 1.5px solid var(--ink);
   border-radius: 2mm;
-  background: #fbf8ef;
+  background: #fff;
 }
 .qr img { width: 22mm; height: 22mm; display: block; }
 .qr p { margin: 0; font-size: 8.4pt; line-height: 1.35; }
@@ -267,6 +278,8 @@ a { color: inherit; }
 @media print {
   body { background: none; }
   .toolbar { display: none; }
+  body.editing .sheet { outline: none; }
+  body.editing .sheet :focus { background: none; }
   .sheet {
     margin: 0;
     box-shadow: none;
