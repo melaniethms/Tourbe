@@ -37,11 +37,53 @@
   toolbar.insertBefore(resetBtn, toolbar.querySelector(".primary"));
   toolbar.appendChild(note);
 
+  // ---- Export des brouillons (version actuelle et anciennes versions) ----
+  const PREFIX = "brouillon:" + location.pathname + ":";
+  function allDrafts() {
+    const out = [];
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.indexOf(PREFIX) === 0) {
+          try { out.push({ key: k, current: k === KEY, sheets: JSON.parse(localStorage.getItem(k)) }); } catch (e) {}
+        }
+      }
+    } catch (e) {}
+    return out;
+  }
+  const exportBtn = document.createElement("button");
+  exportBtn.type = "button";
+  exportBtn.textContent = "⤓ Exporter mes modifications";
+  exportBtn.hidden = true;
+  toolbar.insertBefore(exportBtn, toolbar.querySelector(".primary"));
+
+  exportBtn.addEventListener("click", () => {
+    const drafts = allDrafts();
+    if (!drafts.length) { note.textContent = "Aucune modification enregistrée dans ce navigateur."; return; }
+    const page = location.pathname.split("/").pop().replace(".html", "") || "page";
+    const stamp = new Date().toISOString().slice(0, 16).replace("T", "_").replace(":", "h");
+    const body = drafts.map((d, n) =>
+      `<section data-key="${d.key}" data-current="${d.current}">\n<h2>Brouillon ${n + 1}${d.current ? " (version actuelle)" : " (ancienne version)"}</h2>\n` +
+      (Array.isArray(d.sheets) ? d.sheets : []).map((h) => `<article class="sheet">${h}</article>`).join("\n") +
+      "\n</section>").join("\n");
+    const html = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Brouillon ${page} ${stamp}</title></head><body>\n${body}\n</body></html>`;
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([html], { type: "text/html" }));
+    a.download = `brouillon-${page}-${stamp}.html`;
+    document.body.appendChild(a); a.click(); a.remove();
+    note.textContent = "Fichier téléchargé : envoie-le à Claude pour publier ces modifications en ligne.";
+  });
+
   const saved = store.get();
   if (Array.isArray(saved) && saved.length === sheets.length) {
     sheets.forEach((s, i) => { s.innerHTML = saved[i]; });
     resetBtn.hidden = false;
     note.textContent = "Brouillon modifié chargé (enregistré dans ce navigateur).";
+  }
+  const drafts0 = allDrafts();
+  if (drafts0.length) exportBtn.hidden = false;
+  if (drafts0.some((d) => !d.current)) {
+    note.textContent = "Des modifications faites sur une version précédente ont été retrouvées : clique sur « Exporter mes modifications » et envoie le fichier à Claude.";
   }
 
   let editing = false;
@@ -51,6 +93,7 @@
     timer = setTimeout(() => {
       const ok = store.set(sheets.map((s) => s.innerHTML));
       resetBtn.hidden = false;
+      exportBtn.hidden = false;
       note.textContent = ok
         ? "Modifications enregistrées dans ce navigateur."
         : "Impossible d'enregistrer ici : pensez à imprimer en PDF avant de fermer.";
